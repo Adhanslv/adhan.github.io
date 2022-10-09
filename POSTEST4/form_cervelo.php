@@ -12,7 +12,7 @@
 <body>
     <div class="form">  
     <p class="asa" >Wind Store</p>
-    <form action="show.php" method="POST">
+    <form action="show_cervelo.php" method="POST">
         <table border = "0">
             <tr>
                 <td>Nama</td>
@@ -52,7 +52,7 @@
             <tr>
                 <td colspan="2">
                     <button type="submit" name="simpan"><i class="fa fa-check-circle"></i>  Simpan Data</button>
-                    <a href="?hal=form_polygon" class="kembali"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
+                    <a href="index.html" class="kembali"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
 			    </td>
             </tr>   
     </table>

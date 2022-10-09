@@ -49,17 +49,17 @@
 <style>
 
 h1{
-    margin-left:753px;
+    margin-left:573px;
 }
 
 .form{
- 	width: 1406px;
+ 	width: 1106px;
  	background-color: #fff;
  	position: fixed;
  	margin-left: 142px;
 	text-align: center;
 	top: 122px;
-	color: #25476a;
+	color: black;
 }
 
 table{
