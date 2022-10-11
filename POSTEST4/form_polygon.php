@@ -29,7 +29,13 @@
             <tr>
                 <td>Harga Sepeda</td>
                 <td>
-                    <input type="text"  name="harga" value="Rp 1.500.000" readonly>
+                    <input type="text"  name="harga"  value="Rp 1.500.000" readonly >
+                </td>
+            </tr> 
+            <tr>
+                <td>Jumlah Sepeda</td>
+                <td>
+                    <input type="number"  name="jumlah"  placeholder="Jumlah Sepeda" required>
                 </td>
             </tr> 
             <tr>

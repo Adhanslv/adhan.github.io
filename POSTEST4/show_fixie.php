@@ -11,7 +11,7 @@
     <h1>Data Pembelian</h1>
     <?php if(isset($_POST['simpan'])){?>
         <div class="form">
-       <table border="1">
+       <table>
        <tr>
             <td><h3>Nama</h3</td>
             <td>
@@ -28,6 +28,12 @@
             <td><h3>Harga Sepeda</h3></td>
             <td>
                 <h3 id="harga" class="jarak-atas"><?php echo $_POST['harga'] ?></h3>
+            </td>
+        </tr>
+        <tr>
+            <td><h3>Jumlah Sepeda</h3></td>
+            <td>
+                <h3 id="jumlah" class="jarak-atas"><?php echo $_POST['jumlah'] ?></h3>
             </td>
         </tr>
         <tr>
@@ -49,7 +55,7 @@
 <style>
 
 h1{
-    margin-left:573px;
+	text-align: center;
 }
 
 .form{
@@ -63,15 +69,19 @@ h1{
 }
 
 table{
-    border-collapse : collapse;
     margin-left: 20px;
     margin-top: 20px;
     font-size: 14px;
     width: 759px;
     margin: 2% auto;
+
 }
 table td{
     padding: 5px 5px;
+}
+
+th, td {
+  border-bottom: 1px solid #DDD;
 }
 
 </style>

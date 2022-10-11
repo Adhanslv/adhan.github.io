@@ -33,6 +33,12 @@
                 </td>
             </tr> 
             <tr>
+                <td>Jumlah Sepeda</td>
+                <td>
+                    <input type="number"  name="jumlah"  placeholder="Jumlah Sepeda" required>
+                </td>
+            </tr> 
+            <tr>
                 <td>Tanggal Pembelian</td>
                 <td>
                     <input type="date" id="date-picker" name="tanggal" required >
