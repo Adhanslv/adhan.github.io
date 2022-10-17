@@ -8,7 +8,7 @@
 			case 'ubah' :
 				include "ubah.php";
 				break;
-				
+
 			case 'hapus' :
 				include "hapus.php";
 				break;

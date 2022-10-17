@@ -10,15 +10,15 @@ include '..\koneksi.php';
 		$kode = $data['maxKode'];
 		$noUrut = (int) substr($kode, 3,3);
 		@$noUrut++;
-		$char = "POL";
+		$char = "P";
 		$kos = $char . sprintf("%03s", $noUrut);
 	}
 
 
 
  if(isset($_POST['simpan'])){
-    
     $id_polygon         = $kos; 
+    $id_data            = $_POST['id_data'];
     $nama               = $_POST['nama'];
     $jenis_sepeda       = $_POST['jenis_sepeda'];
     $harga              = $_POST['harga'];
@@ -27,7 +27,7 @@ include '..\koneksi.php';
     $jenis_warna        = $_POST['jenis_warna'];
 
     // Menambahkan data INTO nama_table VALUES nama fieldnya;
- 	$query = "INSERT INTO tb_polygon VALUES ('$id_polygon', '$nama', ' $jenis_sepeda',
+ 	$query = "INSERT INTO tb_polygon VALUES ('$id_polygon','$id_data', '$nama', ' $jenis_sepeda',
                                             '$harga', '$jumlah', '$tanggal', 
                                             '$jenis_warna')";
  	$dbh->exec($query);
@@ -52,6 +52,21 @@ include '..\koneksi.php';
     <p class="asa" >Wind Store</p>
     <form  method="POST">
         <table border = "0">
+        <tr>
+        <td>NS Polygon</td>
+        <td>
+            <select name="id_data">
+                <option value="">* Pilih Nomor Seri *</option>
+                <?php
+                    $tampil = "SELECT * FROM tb_data";
+                    $query = $dbh->query($tampil);
+                    foreach($query as $data){
+                ?>
+                <option value="<?php echo $data['id_data'];?>"><?php echo $data['id_data'];?> | <?php echo $data['ns_polygon'];?></option>
+                <?php } ?>
+            </select>
+        </td>
+		</tr>
             <tr>
                 <td>Nama</td>
                 <td> 

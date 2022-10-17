@@ -1,17 +1,39 @@
 <?php
-// Memamngil file Koneksi.php;
-include "..\koneksi.php";
-	if(isset($_GET['id_cervelo'])) {
-        // Mengambil data untuk di ubah berdasarkan id;
-		$query=$dbh->query(" SELECT * FROM tb_cervelo WHERE id_cervelo='$_GET[id_cervelo]'");
-		$data=$query->fetch(PDO::FETCH_ASSOC);
+// Memamnggil file koneksi.php;
+include '..\koneksi.php';
+	
+    // Mengambail nilai maximum dari id as = ALiAS maxKode;
+    // Membuat id automatis;
+    // ID DATA;
+	$tampil = "SELECT max(id_data) as maxKode FROM tb_data";
+	$query = $dbh->query($tampil);
+	foreach($query as $data){
+		$kode = $data['maxKode'];
+		$noUrut = (int) substr($kode, 3,3);
+		@$noUrut++;
+		$char = "DT";
+		$idData = $char . sprintf("%03s", $noUrut);
 	}
-    if(isset($_GET['id_cervelo'])) {
-		$query=$dbh->query("SELECT * FROM tb_cervelo a JOIN tb_data b ON a.id_data = b.id_data ");
-		$data=$query->fetch(PDO::FETCH_ASSOC);
-	}
-?>
 
+
+ if(isset($_POST['simpan'])){
+    $id_data      = $idData;
+    $ns_polygon   = $_POST['ns_polygon']; 
+    $ns_cervelo   = $_POST['ns_cervelo']; 
+    $ns_fixie     = $_POST['ns_fixie']; 
+    $buat         = $_POST['tanggal_buat'];
+    $launch       = $_POST['tanggal_launch'];
+
+
+    // Menambahkan data INTO nama_table VALUES nama fieldnya;
+ 	$query = "INSERT INTO tb_data VALUES('$id_data', '$ns_polygon', ' $ns_cervelo',
+                                        '$ns_fixie', '$buat', '$launch')";
+ 	$dbh->exec($query);
+
+ if ($query)
+ 	 echo "<span class=berhasil>Data Produksi Sepeda Berhasil Di Tambah,<a href=index.php>Lihat Data</a></span>";
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +41,7 @@ include "..\koneksi.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/6acc3fbd7c.js" crossorigin="anonymous"></script>
-    <title>Form Pembelian</title>
+    <title>Form Data</title>
     <link rel="icon" href="https://www.freepnglogos.com/uploads/honda-logo-png/honda-motorcycles-logo-wing-10.png">    <link rel="icon" href="https://www.freepnglogos.com/uploads/honda-logo-png/honda-motorcycles-logo-wing-10.png">
 
 </head>
@@ -29,80 +51,44 @@ include "..\koneksi.php";
     <form  method="POST">
         <table border = "0">
             <tr>
-                <td>Nama</td>
+                <td>NS Polygon</td>
                 <td> 
-                    <input type="text" name="nama" value="<?php echo $data['nama']?>">
+                    <input type="text" name="ns_polygon" autocomplete="off"  required>
                 </td>
             </tr>
             <tr>
-                <td>Jenis Sepeda</td>
+                <td>NS Cervelo</td>
                 <td>
-                    <input type="text" name="jenis_sepeda" value="<?php echo $data['jenis_sepeda']?>"readonly>
+                    <input type="text" name="ns_cervelo"  autocomplete="off" required>
                 </td>
             </tr>
             <tr>
-                <td>Harga Sepeda</td>
+                <td>NS Fixied-Gear</td>
                 <td>
-                    <input type="text" name="harga" value="Rp 1.500.000" value="<?php echo $data['harga']?>" readonly>
+                    <input type="text" name="ns_fixie"  autocomplete="off" required>
                 </td>
             </tr>
             <tr>
-                <td>Jumlah</td>
+                <td>Tanggal Pembuatan</td>
                 <td>
-                    <input type="number" name="jumlah" value="<?php echo $data['jumlah']?>" required>
+                    <input type="date" name="tanggal_buat" required>
                 </td>
             </tr>
             <tr>
-                <td>Tanggal Pembelian</td>
+                <td>Tanggal Launching</td>
                 <td>
-                    <input type="date" id="date-picker" name="tanggal" value="<?php echo $data['tanggal']?>" required >
-                </td>
-            </tr>
-            <tr>
-                <td>Jenis Warna</td>
-                <td>
-                <select class="choose" name="jenis_warna">
-                    <option value="<?php echo $data['jenis_warna']?>"><?php echo $data['jenis_warna']?></option>	
-                    <option value="Merah">Merah</option>
-                    <option value="Kuning">Kuning</option>
-                    <option value="Hijau">Hijau</option>
-                    <option value="Biru">Biru</option>
-                </select>
+                    <input type="date" id="date-picker" name="tanggal_launch" required >
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <button type="submit" name="update"><i class="fa fa-check-circle"></i>  Ubah Data</button>
+                    <button type="submit" name="simpan"><i class="fa fa-check-circle"></i>  Simpan Data</button>
                     <a href="lihat.php" class="kembali"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
 			    </td>
             </tr>   
     </table>
     </form>
     </div>
-
-<?php
-	if (isset($_POST['update'])) {
-        $id_cervelo         = $_GET['id_cervelo']; 
-        $nama               = $_POST['nama'];
-        $jenis_sepeda       = $_POST['jenis_sepeda'];
-        $harga              = $_POST['harga'];
-        $jumlah             = $_POST['jumlah'];
-        $tanggal            = $_POST['tanggal'];
-        $jenis_warna        = $_POST['jenis_warna'];
-
-        // Mengupdate data dari table berdasrkan fieldnya;
-		$myqry="UPDATE tb_cervelo SET nama = '$nama',
-		 							 jenis_sepeda = '$jenis_sepeda',
-		 							 harga = '$harga',
-		 							 jumlah = '$jumlah',
-		 							 tanggal = '$tanggal',
-		 							 jenis_warna = '$jenis_warna'
-		 							 WHERE id_cervelo='$id_cervelo'";
-
-		$dbh->exec($myqry);
-			echo "<span class=berhasil>Data Barang Berhasil Di Ubah,<a href=index.php>Lihat Data</a></span>";
-	}
-?>
     <script>
         var date = new Date();
         var year = date.getFullYear();
@@ -114,6 +100,7 @@ include "..\koneksi.php";
 </body>
 </html>
 <style>
+
 .form{
  	width: 1106px;
  	background-color: #fff;
@@ -166,7 +153,6 @@ input:focus,textarea:focus{
 .berhasil{
     text-decoration:none;
     background: #5cb85c;
-    border: 1px solid #449d44;
     padding: 10px 20px;
     color: #fff;
     margin-top: 45px;
@@ -201,5 +187,4 @@ button:hover{
 .kembali:hover{
 	background: red;
 }
-
 </style>

@@ -1,13 +1,9 @@
 <?php
 // Memamngil file Koneksi.php;
 include "..\koneksi.php";
-	if(isset($_GET['id_cervelo'])) {
+	if(isset($_GET['id_data'])) {
         // Mengambil data untuk di ubah berdasarkan id;
-		$query=$dbh->query(" SELECT * FROM tb_cervelo WHERE id_cervelo='$_GET[id_cervelo]'");
-		$data=$query->fetch(PDO::FETCH_ASSOC);
-	}
-    if(isset($_GET['id_cervelo'])) {
-		$query=$dbh->query("SELECT * FROM tb_cervelo a JOIN tb_data b ON a.id_data = b.id_data ");
+		$query=$dbh->query(" SELECT * FROM tb_data WHERE id_data='$_GET[id_data]'");
 		$data=$query->fetch(PDO::FETCH_ASSOC);
 	}
 ?>
@@ -29,47 +25,36 @@ include "..\koneksi.php";
     <form  method="POST">
         <table border = "0">
             <tr>
-                <td>Nama</td>
+                <td>NS Polygon</td>
                 <td> 
-                    <input type="text" name="nama" value="<?php echo $data['nama']?>">
+                    <input type="text" name="ns_polygon" value="<?php echo $data['ns_polygon']?>" autocomplete="off" readonly>
                 </td>
             </tr>
             <tr>
-                <td>Jenis Sepeda</td>
+                <td>NS Cervelo</td>
                 <td>
-                    <input type="text" name="jenis_sepeda" value="<?php echo $data['jenis_sepeda']?>"readonly>
+                    <input type="text" name="ns_cervelo" value="<?php echo $data['ns_cervelo']?>" autocomplete="off" readonly>
                 </td>
             </tr>
             <tr>
-                <td>Harga Sepeda</td>
+                <td>NS Fixied-Gear</td>
                 <td>
-                    <input type="text" name="harga" value="Rp 1.500.000" value="<?php echo $data['harga']?>" readonly>
+                    <input type="text" name="ns_fixie"  value="<?php echo $data['ns_fixie']?>" autocomplete="off" readonly>
                 </td>
             </tr>
             <tr>
-                <td>Jumlah</td>
+                <td>Tanggal Pembuatan</td>
                 <td>
-                    <input type="number" name="jumlah" value="<?php echo $data['jumlah']?>" required>
+                    <input type="date" name="tanggal_buat" value="<?php echo $data['tanggal_buat']?>" required>
                 </td>
             </tr>
             <tr>
-                <td>Tanggal Pembelian</td>
+                <td>Tanggal Launching</td>
                 <td>
-                    <input type="date" id="date-picker" name="tanggal" value="<?php echo $data['tanggal']?>" required >
+                    <input type="date" id="date-picker" name="tanggal_launch" value="<?php echo $data['tanggal_launch']?>" required >
                 </td>
             </tr>
             <tr>
-                <td>Jenis Warna</td>
-                <td>
-                <select class="choose" name="jenis_warna">
-                    <option value="<?php echo $data['jenis_warna']?>"><?php echo $data['jenis_warna']?></option>	
-                    <option value="Merah">Merah</option>
-                    <option value="Kuning">Kuning</option>
-                    <option value="Hijau">Hijau</option>
-                    <option value="Biru">Biru</option>
-                </select>
-                </td>
-            </tr>
             <tr>
                 <td colspan="2">
                     <button type="submit" name="update"><i class="fa fa-check-circle"></i>  Ubah Data</button>
@@ -82,22 +67,21 @@ include "..\koneksi.php";
 
 <?php
 	if (isset($_POST['update'])) {
-        $id_cervelo         = $_GET['id_cervelo']; 
-        $nama               = $_POST['nama'];
-        $jenis_sepeda       = $_POST['jenis_sepeda'];
-        $harga              = $_POST['harga'];
-        $jumlah             = $_POST['jumlah'];
-        $tanggal            = $_POST['tanggal'];
-        $jenis_warna        = $_POST['jenis_warna'];
+
+        $id_data      = $_GET['id_data'];
+        $ns_polygon   = $_POST['ns_polygon']; 
+        $ns_cervelo   = $_POST['ns_cervelo']; 
+        $ns_fixie     = $_POST['ns_fixie']; 
+        $buat         = $_POST['tanggal_buat'];
+        $launch       = $_POST['tanggal_launch'];
 
         // Mengupdate data dari table berdasrkan fieldnya;
-		$myqry="UPDATE tb_cervelo SET nama = '$nama',
-		 							 jenis_sepeda = '$jenis_sepeda',
-		 							 harga = '$harga',
-		 							 jumlah = '$jumlah',
-		 							 tanggal = '$tanggal',
-		 							 jenis_warna = '$jenis_warna'
-		 							 WHERE id_cervelo='$id_cervelo'";
+		$myqry="UPDATE tb_data SET  ns_polygon = '$ns_polygon',
+		 							ns_cervelo = '$ns_cervelo',
+		 							ns_fixie = '$ns_fixie',
+		 							tanggal_buat = '$buat',
+		 							tanggal_launch = '$launch'
+		 							 WHERE id_data='$id_data'";
 
 		$dbh->exec($myqry);
 			echo "<span class=berhasil>Data Barang Berhasil Di Ubah,<a href=index.php>Lihat Data</a></span>";

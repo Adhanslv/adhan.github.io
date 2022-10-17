@@ -15,9 +15,10 @@ include '..\koneksi.php';
 	}
 
 
+
  if(isset($_POST['simpan'])){
-    
-    $id_fixie         = $kos; 
+    $id_fixie           = $kos; 
+    $id_data            = $_POST['id_data'];
     $nama               = $_POST['nama'];
     $jenis_sepeda       = $_POST['jenis_sepeda'];
     $harga              = $_POST['harga'];
@@ -26,7 +27,7 @@ include '..\koneksi.php';
     $jenis_warna        = $_POST['jenis_warna'];
 
     // Menambahkan data INTO nama_table VALUES nama fieldnya;
- 	$query = "INSERT INTO tb_fixie VALUES ('$id_fixie', '$nama', ' $jenis_sepeda',
+ 	$query = "INSERT INTO tb_fixie VALUES ('$id_fixie  ','$id_data', '$nama', ' $jenis_sepeda',
                                             '$harga', '$jumlah', '$tanggal', 
                                             '$jenis_warna')";
  	$dbh->exec($query);
@@ -51,6 +52,21 @@ include '..\koneksi.php';
     <p class="asa" >Wind Store</p>
     <form  method="POST">
         <table border = "0">
+        <tr>
+        <td>NS Polygon</td>
+        <td>
+            <select name="id_data">
+                <option value="">* Pilih Nomor Seri *</option>
+                <?php
+                    $tampil = "SELECT * FROM tb_data";
+                    $query = $dbh->query($tampil);
+                    foreach($query as $data){
+                ?>
+                <option value="<?php echo $data['id_data'];?>"><?php echo $data['id_data'];?> | <?php echo $data['ns_fixie'];?></option>
+                <?php } ?>
+            </select>
+        </td>
+		</tr>
             <tr>
                 <td>Nama</td>
                 <td> 

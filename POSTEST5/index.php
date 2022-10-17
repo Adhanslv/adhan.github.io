@@ -14,9 +14,9 @@
         <ul>
             <li class="pertama">Wind</li>
             <li class="kedua">Store</li>
-            <li><a href="about.html"  onclick="return confirm('Pindah Halaman?')"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a  onclick="myBackGround()"  ><i class=" matahari fa-regular fa-sun"></i> </a></li>
+            <li><a href="about.php" onclick="return confirm('Pindah Halaman?')"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="data_sepeda/index.php"><i class="fa-solid fa-book-tanakh"></i> Data</a></li>
+            <!-- <li><a href="index.php"><i class="fas fa-home"></i> Home</a></li> -->
         </ul>
     </div>
     <div class="gambar">
@@ -42,7 +42,7 @@
                 <i onclick="myFunction(this)" class="fa fa-light fa-heart"s></i> 
                 <h4><b>Cervelo</b></h4>
                 <p>Rp 1.600.000</p>
-                <a href="?hal=cervelo"><button onclick="return confirm('Beli Sekarang ?')"><i class="fas fa-shopping-cart" ></i> Beli Sekarang</button></a>
+                <a href="cervelo/index.php"><button onclick="return confirm('Beli Sekarang ?')"><i class="fas fa-shopping-cart" ></i> Beli Sekarang</button></a>
             </div>
         </div>
         <div class="card">
@@ -51,7 +51,7 @@
                 <i onclick="myFunction(this)" class="fa fa-light fa-heart"s></i> 
                 <h4><b>Fixied-Gear</b></h4>
                 <p>Rp 2.500.000</p>
-                <a href="?hal=fixie"><button onclick="return confirm('Beli Sekarang ?')"><i class="fas fa-shopping-cart" ></i> Beli Sekarang</button></a>
+                <a href="fixie/index.php"><button onclick="return confirm('Beli Sekarang ?')"><i class="fas fa-shopping-cart" ></i> Beli Sekarang</button></a>
             </div>
         </div>
    </div>

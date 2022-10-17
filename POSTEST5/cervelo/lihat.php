@@ -14,6 +14,7 @@
     <table>
         <tr>
             <th>ID</th>
+            <th>ID Data</th>
             <th>Nama</th>
             <th>Jenis Sepeda</th>
             <th>Harga Sepeda</th>
@@ -26,12 +27,13 @@
         // Memanggil file koneksi.php;
         include "..\koneksi.php";
         // Mengambil data dari table;
-        $tampil = "SELECT * FROM tb_cervelo";
+        $tampil = "SELECT * FROM tb_cervelo a JOIN tb_data b ON a.id_data = b.id_data ";
         $query = $dbh->query($tampil);
         foreach ($query as $data ){
         ?>
         <tr>
             <td><?php echo $data ['id_cervelo']?></td>
+            <td><?php echo $data ['id_data']. ' | ' .$data['ns_cervelo']?></td>
             <td><?php echo $data ['nama']?></td>
             <td><?php echo $data ['jenis_sepeda']?></td>
             <td><?php echo $data ['harga']?></td>

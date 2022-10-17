@@ -10,10 +10,11 @@
 </head>
 <body>
     <a href="tambah.php"><button class="tambah" ><i class="fa-solid fa-plus"></i> Tambah Data</button></a>
-    <p class="info">Data Sepeda Fixie</p>
+    <p class="info">Data Sepeda Fixied-Gear</p>
     <table>
         <tr>
             <th>ID</th>
+            <th>ID Data</th>
             <th>Nama</th>
             <th>Jenis Sepeda</th>
             <th>Harga Sepeda</th>
@@ -26,12 +27,13 @@
         // Memanggil file koneksi.php;
         include "..\koneksi.php";
         // Mengambil data dari table;
-        $tampil = "SELECT * FROM tb_fixie";
+        $tampil = "SELECT * FROM tb_fixie a JOIN tb_data b ON a.id_data = b.id_data ";
         $query = $dbh->query($tampil);
         foreach ($query as $data ){
         ?>
         <tr>
             <td><?php echo $data ['id_fixie']?></td>
+            <td><?php echo $data ['id_data']. ' | ' .$data['ns_fixie']?></td>
             <td><?php echo $data ['nama']?></td>
             <td><?php echo $data ['jenis_sepeda']?></td>
             <td><?php echo $data ['harga']?></td>
@@ -100,6 +102,7 @@ th, td {
 }
 
 th {
+  cursor:pointer;
   background-color: #5d78a3;
   color: white;
 }

@@ -1,8 +1,8 @@
 <?php
 // Memamnggil file koneksi.php;
 include '..\koneksi.php';
-
-	// Mengambail nilai maximum dari id as = ALiAS maxKode;
+	
+    // Mengambail nilai maximum dari id as = ALiAS maxKode;
     // Membuat id automatis;
 	$tampil = "SELECT max(id_cervelo) as maxKode FROM tb_cervelo";
 	$query = $dbh->query($tampil);
@@ -10,24 +10,23 @@ include '..\koneksi.php';
 		$kode = $data['maxKode'];
 		$noUrut = (int) substr($kode, 3,3);
 		@$noUrut++;
-		$char = "CEL";
+		$char = "CV";
 		$kos = $char . sprintf("%03s", $noUrut);
 	}
 
 
-
  if(isset($_POST['simpan'])){
-    
     $id_cervelo         = $kos; 
+    $id_data            = $_POST['id_data'];
     $nama               = $_POST['nama'];
     $jenis_sepeda       = $_POST['jenis_sepeda'];
     $harga              = $_POST['harga'];
     $jumlah             = $_POST['jumlah'];
     $tanggal            = $_POST['tanggal'];
     $jenis_warna        = $_POST['jenis_warna'];
-    
+
     // Menambahkan data INTO nama_table VALUES nama fieldnya;
- 	$query = "INSERT INTO tb_cervelo VALUES ('$id_cervelo', '$nama', ' $jenis_sepeda',
+ 	$query = "INSERT INTO tb_cervelo VALUES ('$id_cervelo','$id_data', '$nama', ' $jenis_sepeda',
                                             '$harga', '$jumlah', '$tanggal', 
                                             '$jenis_warna')";
  	$dbh->exec($query);
@@ -52,6 +51,21 @@ include '..\koneksi.php';
     <p class="asa" >Wind Store</p>
     <form  method="POST">
         <table border = "0">
+        <tr>
+        <td>NS Cervelo</td>
+        <td>
+            <select name="id_data">
+                <option value="">* Pilih Nomor Seri *</option>
+                <?php
+                    $tampil = "SELECT * FROM tb_data";
+                    $query = $dbh->query($tampil);
+                    foreach($query as $data){
+                ?>
+                <option value="<?php echo $data['id_data'];?>"><?php echo $data['id_data'];?> | <?php echo $data['ns_cervelo'];?></option>
+                <?php } ?>
+            </select>
+        </td>
+		</tr>
             <tr>
                 <td>Nama</td>
                 <td> 

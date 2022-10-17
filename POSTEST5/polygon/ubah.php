@@ -6,6 +6,10 @@ include "..\koneksi.php";
 		$query=$dbh->query(" SELECT * FROM tb_polygon WHERE id_polygon='$_GET[id_polygon]'");
 		$data=$query->fetch(PDO::FETCH_ASSOC);
 	}
+    if(isset($_GET['id_polygon'])) {
+		$query=$dbh->query("SELECT * FROM tb_polygon a JOIN tb_data b ON a.id_data = b.id_data ");
+		$data=$query->fetch(PDO::FETCH_ASSOC);
+	}
 ?>
 
 <!DOCTYPE html>

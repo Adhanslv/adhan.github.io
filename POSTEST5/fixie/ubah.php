@@ -6,6 +6,10 @@ include "..\koneksi.php";
 		$query=$dbh->query(" SELECT * FROM tb_fixie WHERE id_fixie='$_GET[id_fixie]'");
 		$data=$query->fetch(PDO::FETCH_ASSOC);
 	}
+    if(isset($_GET['id_fixie'])) {
+		$query=$dbh->query("SELECT * FROM tb_fixie a JOIN tb_data b ON a.id_data = b.id_data ");
+		$data=$query->fetch(PDO::FETCH_ASSOC);
+	}
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +82,7 @@ include "..\koneksi.php";
 
 <?php
 	if (isset($_POST['update'])) {
-        $id_fixie           = $_GET['id_fixie']; 
+        $id_fixie         = $_GET['id_fixie']; 
         $nama               = $_POST['nama'];
         $jenis_sepeda       = $_POST['jenis_sepeda'];
         $harga              = $_POST['harga'];
@@ -87,7 +91,7 @@ include "..\koneksi.php";
         $jenis_warna        = $_POST['jenis_warna'];
 
         // Mengupdate data dari table berdasrkan fieldnya;
-		$myqry="UPDATE tb_fixie SET  nama = '$nama',
+		$myqry="UPDATE tb_fixie SET nama = '$nama',
 		 							 jenis_sepeda = '$jenis_sepeda',
 		 							 harga = '$harga',
 		 							 jumlah = '$jumlah',
@@ -100,10 +104,6 @@ include "..\koneksi.php";
 	}
 ?>
     <script>
-
-        onclick="return confirm('Beli Sekarang ?')"
-
-
         var date = new Date();
         var year = date.getFullYear();
         var month = String(date.getMonth()+1).padStart(2,'0');
